@@ -1,0 +1,46 @@
+FROM ultralytics/ultralytics:8.2.103-jetson-jetpack5
+
+ENV PYTHONDONTWRITEBYTECODE=true
+
+ENV WORKSPACE_PATH=/root/workspace
+RUN mkdir -p ${WORKSPACE_PATH}
+
+COPY        VimbaX_Setup-2024-1-Linux_ARM64.tar.gz ${WORKSPACE_PATH}
+
+RUN apt update && apt install -y usbutils vim && rm -rf /var/lib/apt/lists/*
+RUN python3 -m pip install --upgrade pip --no-cache-dir
+RUN cd ${WORKSPACE_PATH} \
+    && tar -xzf VimbaX_Setup-2024-1-Linux_ARM64.tar.gz -C /opt \
+    && mv /opt/VimbaX_2024-1 /opt/VimbaX \
+    && cd /opt/VimbaX/cti \
+    && ./Install_GenTL_Path.sh
+RUN cd /opt/VimbaX/api/python && pip3 install vmbpy-1.0.5-py3-none-any.whl --no-cache-dir
+
+ENV GENICAM_GENTL64_PATH="/opt/VimbaX/cti"
+
+#            && rm VimbaX_Setup-2024-1-Linux_ARM64.tar.gz \
+
+#            && mkdir -p /etc/udev/rules.d \
+#            && cd /opt/VimbaX/VimbaUSBTL/ \
+#            && ./Install.sh \
+#            && cd ../VimbaPython/Source/ \
+#            && python -m pip install . \
+#            && cd .. \
+#            && rm -rf VimbaGigETL \
+#            && rm -rf VimbaCPP \
+#            && rm -rf /opt/VimbaX/VimbaC/DynamicLib/x86_32bit \
+#            && rm -rf /opt/VimbaX/VimbaCPP/DynamicLib/x86_32bit \
+#            && rm -rf /opt/VimbaX/VimbaImageTransform/DynamicLib/x86_32bit \
+#            && rm -rf /opt/VimbaX/Tools/Viewer \
+#            && rm -rf /opt/VimbaX/Tools/VimbaClassGenerator/Bin/x86_32bit \
+#            && rm -rf /opt/VimbaX/Tools/FirmwareUpdater/Bin/x86_32bit \
+#            && rm -rf /opt/VimbaX/VimbaC/Examples/Bin/x86_32bit \
+#            && rm -rf /opt/VimbaX/VimbaCPP/Examples/Bin/x86_32bit \
+#            && rm -rf /opt/VimbaX/VimbaUSBTL/CTI/x86_32bit \
+#            && rm -rf /opt/VimbaX/VimbaGigETL/CTI/x86_32bit
+
+#ENV         GENICAM_GENTL64_PATH=$GENICAM_GENTL64_PATH:"/opt/VimbaX/VimbaUSBTL/CTI/x86_64bit"
+#
+#WORKDIR     /opt/VimbaX/VimbaPython/Examples
+#
+#ENTRYPOINT  ["python"]

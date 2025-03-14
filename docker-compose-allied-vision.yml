@@ -1,0 +1,12 @@
+#version: '3.8'
+
+services:
+  allied_vision:
+    image: tmetal/allied-vision-1800-u-500c:latest
+    container_name: allied_vision
+    privileged: true
+    init: true
+    stdin_open: true
+    tty: true
+    volumes:
+      - /dev/bus/usb:/dev/bus/usb
