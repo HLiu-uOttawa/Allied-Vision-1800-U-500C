@@ -9,6 +9,16 @@ This repository demonstrates how to install the Vimba SDK and run the Allied Vis
 ```bash
 wget https://downloads.alliedvision.com/VimbaX/VimbaX_Setup-2024-1-Linux_ARM64.tar.gz
 ```
+
+## Mapping
+```bash
+lsusb
+Bus 002 Device 003: ID 1ab2:0001 VIA Labs, Inc.          USB3.1 Hub
+···
+* Bus: 002
+* Device: 003
+* ID: 1ab2:0001（Company ID & Device ID）
+
 ## Docker Buildx
 Leveraging buildx to create a Docker image tailored for the ARM64 architecture, specifically for the NVIDIA Jetson Orin, using a custom Dockerfile named Dockerfile-jetson-jetpack5. The resulting image is tagged as Object-Tracking-Experiment:latest.
 ```bash
