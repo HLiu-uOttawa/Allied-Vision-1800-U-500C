@@ -14,7 +14,8 @@ wget https://downloads.alliedvision.com/VimbaX/VimbaX_Setup-2024-1-Linux_ARM64.t
 ```bash
 lsusb
 Bus 002 Device 003: ID 1ab2:0001 VIA Labs, Inc.          USB3.1 Hub
-···
+```
+
 * Bus: 002
 * Device: 003
 * ID: 1ab2:0001（Company ID & Device ID）
