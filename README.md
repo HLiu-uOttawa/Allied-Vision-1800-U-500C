@@ -1,4 +1,3 @@
-https://gist.github.com/stefannae/d0f9c3590bbeb6443a70be71f7604a74
 # Allied-Vision-1800-U-500C
 This repo shows how to install Vimba SDK and run Allied-Vision-1800-U-500C
 ## 
@@ -80,3 +79,5 @@ Cameras found: 2
 nvidia@orin-nx:/opt/VimbaX_2024-1/api/examples/VmbPy$
 
 ```
+## Reference
+https://gist.github.com/stefannae/d0f9c3590bbeb6443a70be71f7604a74  
