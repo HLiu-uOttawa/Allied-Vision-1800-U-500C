@@ -1,11 +1,10 @@
-# Allied-Vision-1800-U-500C
+# Repo
 This repository demonstrates how to install the Vimba SDK and run the Allied Vision Alvium 1800 U-500C using USB passthrough in a Docker container. The setup has been successfully tested on Jetson AGX with JetPack 5.1.3 [L4T 35.5.0] and Jetson Orin.
-## 
-https://www.alliedvision.com/en/products/software/vimba-x-sdk/
-
-## Vimba X SDK Downloads
-[Downloads Page](https://www.alliedvision.com/en/products/software/vimba-x-sdk/#c13326)  
-[VimbaX_Setup-2024-1-Linux_ARM64.tar.gz](https://downloads.alliedvision.com/VimbaX/VimbaX_Setup-2024-1-Linux_ARM64.tar.gz)
+## Allied-Vision-1800-U-500C
+* [Vimba X SDK](https://www.alliedvision.com/en/products/software/vimba-x-sdk/)  
+* [Alvium 1800 U-500](https://www.alliedvision.com/en/products/alvium-configurator/alvium-1800-u/500/)
+* [Vimba X SDK Downloads Page](https://www.alliedvision.com/en/products/software/vimba-x-sdk/#c13326)  
+* [VimbaX_Setup-2024-1-Linux_ARM64.tar.gz](https://downloads.alliedvision.com/VimbaX/VimbaX_Setup-2024-1-Linux_ARM64.tar.gz)
 
 ```bash
 wget https://downloads.alliedvision.com/VimbaX/VimbaX_Setup-2024-1-Linux_ARM64.tar.gz
