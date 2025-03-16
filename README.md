@@ -1,16 +1,25 @@
-https://gist.github.com/stefannae/d0f9c3590bbeb6443a70be71f7604a74
-# Allied-Vision-1800-U-500C
-This repo shows how to install Vimba SDK and run Allied-Vision-1800-U-500C
-## 
-https://www.alliedvision.com/en/products/software/vimba-x-sdk/
-
-## Vimba X SDK Downloads
-[Downloads Page](https://www.alliedvision.com/en/products/software/vimba-x-sdk/#c13326)  
-[VimbaX_Setup-2024-1-Linux_ARM64.tar.gz](https://downloads.alliedvision.com/VimbaX/VimbaX_Setup-2024-1-Linux_ARM64.tar.gz)
+# Repo
+This repository demonstrates how to install the Vimba SDK and run the Allied Vision Alvium 1800 U-500C using USB passthrough in a Docker container. The setup has been successfully tested on Jetson AGX with JetPack 5.1.3 [L4T 35.5.0] and Jetson Orin.
+## Allied-Vision-1800-U-500C
+* [Vimba X SDK](https://www.alliedvision.com/en/products/software/vimba-x-sdk/)  
+* [Alvium 1800 U-500](https://www.alliedvision.com/en/products/alvium-configurator/alvium-1800-u/500/)
+* [Vimba X SDK Downloads Page](https://www.alliedvision.com/en/products/software/vimba-x-sdk/#c13326)  
+* [VimbaX_Setup-2024-1-Linux_ARM64.tar.gz](https://downloads.alliedvision.com/VimbaX/VimbaX_Setup-2024-1-Linux_ARM64.tar.gz)
 
 ```bash
 wget https://downloads.alliedvision.com/VimbaX/VimbaX_Setup-2024-1-Linux_ARM64.tar.gz
 ```
+
+## Mapping
+```bash
+lsusb
+Bus 002 Device 003: ID 1ab2:0001 VIA Labs, Inc.          USB3.1 Hub
+```
+
+* Bus: 002
+* Device: 003
+* ID: 1ab2:0001（Company ID & Device ID）
+
 ## Docker Buildx
 Leveraging buildx to create a Docker image tailored for the ARM64 architecture, specifically for the NVIDIA Jetson Orin, using a custom Dockerfile named Dockerfile-jetson-jetpack5. The resulting image is tagged as Object-Tracking-Experiment:latest.
 ```bash
@@ -77,3 +86,5 @@ Cameras found: 2
 nvidia@orin-nx:/opt/VimbaX_2024-1/api/examples/VmbPy$
 
 ```
+## Reference
+https://gist.github.com/stefannae/d0f9c3590bbeb6443a70be71f7604a74  
