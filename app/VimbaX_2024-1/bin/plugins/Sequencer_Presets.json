@@ -1,0 +1,87 @@
+{
+    "SequencerSetStart": 0,
+    "sets": [
+        {
+              /* This file can be used as a starting point for Sequencer configuration.
+              It shows how to prevent a crash caused by StopImageAcquisition.
+              Set0, Set1, and Set2 contain a feature value change (Gain).
+              Set3 serves as "parking set" to savely stop image acquisition.
+              */
+            "SequencerSetSelector": 0,
+            "features": {
+                "Gain": 3.0
+            },
+            "paths": [
+                {
+                    // AcquisitionStop during ExposureActive may cause crash
+                    "SequencerPathSelector": 0,
+                    "SequencerSetNext": 1, // Next Set in Path0 = Set1
+                    "SequencerTriggerActivation": "FallingEdge", 
+                    "SequencerTriggerSource": "ExposureActive" 
+                    
+                },
+                {
+                     /* Additional path leads to parking set to prevent crash.
+                     Host-controllable trigger source transitions to the parking set
+                    */
+                    "SequencerPathSelector": 1, 
+                    "SequencerSetNext": 3, // Next parking set in Path1 = Set3
+                    "SequencerTriggerActivation": "RisingEdge",
+                    "SequencerTriggerSource": "SoftwareSignal1"
+                }
+            ]
+        },
+        {
+            "SequencerSetSelector": 1,
+            "features": {
+                "Gain": 0.0
+            },
+            "paths": [
+                {
+                    "SequencerPathSelector": 0,
+                    "SequencerSetNext": 2, // Next Set in Path0 = Set2
+                    "SequencerTriggerActivation": "FallingEdge",
+                    "SequencerTriggerSource": "ExposureActive"
+                },
+                {
+                    "SequencerPathSelector": 1,
+                    "SequencerSetNext": 3, // Next parking set in Path1 = Set3
+                    "SequencerTriggerActivation": "RisingEdge",
+                    "SequencerTriggerSource": "SoftwareSignal1"
+                }
+            ]
+        },
+        {
+            "SequencerSetSelector": 2,
+            "features": {
+                "Gain": 6.0
+            },
+            "paths": [
+                {
+                    "SequencerPathSelector": 0,
+                    "SequencerSetNext": 0, // Next Set in Path0 = Set0
+                    "SequencerTriggerActivation": "FallingEdge",
+                    "SequencerTriggerSource": "ExposureActive"
+                },
+                {
+                    "SequencerPathSelector": 1,
+                    "SequencerSetNext": 3, // Next parking set in Path1 = Set3
+                    "SequencerTriggerActivation": "RisingEdge",
+                    "SequencerTriggerSource": "SoftwareSignal1"
+                }
+            ]
+        },
+		{
+             /* In your application, transition with a host-controllable signal
+            (e.g., SoftwareSignal1) to this parking set before executing
+            the AcquisitionStop command.
+              */
+            "SequencerSetSelector": 3,
+            "features": {
+                "Gain": 0.0
+            },
+            "paths": [
+            ]
+        }
+    ]
+}

@@ -16,9 +16,6 @@ Leveraging buildx to create a Docker image tailored for the ARM64 architecture, 
 ```bash
 docker buildx build --platform linux/arm64 -f Dockerfile-jetson-jetpack5 -t allied-vision-1800-u-500c:latest .
 ```
-```bash
-docker buildx build --platform linux/arm64 -f Dockerfile-jetson-jetpack5 -t allied-vision-1800-u-500c:latest .
-```
 
 * Tag
 

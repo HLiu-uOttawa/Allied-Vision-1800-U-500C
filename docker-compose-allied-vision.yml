@@ -4,9 +4,14 @@ services:
   allied_vision:
     image: tmetal/allied-vision-1800-u-500c:latest
     container_name: allied_vision
-    privileged: true
+#    privileged: true
     init: true
     stdin_open: true
     tty: true
-    volumes:
-      - /dev/bus/usb:/dev/bus/usb
+#    volumes:
+#      - /dev/bus/usb:/dev/bus/usb
+    devices:
+      - /dev/bus/usb/002/003:/dev/bus/usb/002/003
+    cap_add:
+      - SYS_ADMIN
+      - SYS_RAWIO

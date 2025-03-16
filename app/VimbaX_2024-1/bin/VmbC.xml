@@ -1,0 +1,69 @@
+<?xml version="1.0" standalone="no" ?>
+<Settings>
+
+    <!--
+        Use this to activate logging and set filename for logging (path can be absolute or relative to API)
+        Default behavior if omitted:    Logging is deactivated
+    -->
+    <!-- <LogFileName>VmbC.log</LogFileName> -->
+    
+    <!--
+        Append messages to log file or reset log file at each API restart (if logging is enabled)
+        True:                           Always append log messages
+        False:                          Reset log file at each API restart
+        Default behavior if omitted:    Reset log file at each API restart
+    -->     
+    <!-- <AppendLog>False</AppendLog> -->
+
+    <TlLoading>
+        <!--
+            Use this to specify paths and directories where VmbC should look for .cti files. 
+            If this element is used Vimba X will NOT evaluate the GENICAM_GENTL64_PATH or 
+            GENICAM_GENTL32_PATH variable.
+            If this element is missing or empty the values from GENICAM_GENTL64_PATH or
+            GENICAM_GENTL32_PATH are used. The paths listed there are not required though. 
+            If the "required" attribute for a path is set to "true" the VmbC initialization will fail in case 
+            that path does not contain a transport layer.
+        -->
+        <CtiPaths>
+            <!-- <Path required="false">.</Path> -->
+        </CtiPaths>
+        
+        <!--
+            Transport layer rules for filtering certain vendors and interfaces. The rules will be applied from top 
+            to bottom until a matching rule is found. Subsequent rules will be ignored then. The rules will be always
+            be applied to all input paths (even if the transport layer is placed next to the VmbC library). 
+            vendor-type: Vendor (short) name. Can also be set to wildcard *. If vendor-type is not specified it will be replaced by *.
+            interface-type: Transport layer interface type. Can also be set to wildcard *. If interface-type is not specified it will be replaced by *.
+               Valid interface-types are: GEV, CL, IIDC, UVC, CXP, CLHS, U3V, Custom
+            rule: "allow" or "deny". If the rule attribute is missing the TlRule will be discarded.
+            In case no TlRule element exists only AVT and NET transport layers are enabled.
+        -->
+        <TlRule vendor-type="SVS" interface-type="GEV" rule="deny"/>
+        <TlRule vendor-type="SVS" interface-type="U3V" rule="allow"/>
+        <TlRule vendor-type="EUR" interface-type="CXP" rule="allow"/>
+        <TlRule vendor-type="AVT" interface-type="*" rule="allow"/>
+        <TlRule vendor-type="NET" interface-type="*" rule="allow"/>
+        <TlRule rule="deny"/>
+
+        <!-- 
+            Poll for interfaces every XXX ms 
+            Default behavior if omitted:    2500 ms
+        -->
+        <InterfacePollingPeriod>2000</InterfacePollingPeriod>
+        
+        <!--
+            Polling periods in ms for devices selected by interface type and vendor type.
+            Default behavior if omitted:    2500 ms
+        -->
+        <!-- <DevicePollingPeriod tl-vendor="NET" interface-type="GEV">20</DevicePollingPeriod> -->
+
+        <!--
+            Timeout in ms used for updating the interface list
+            Default behavior if omitted:    No timeout used
+        -->
+        <!-- <UpdateDeviceListTimeout tl-vendor="NET" interface-type="GEV">50</UpdateDeviceListTimeout> -->
+
+    </TlLoading>
+
+</Settings>

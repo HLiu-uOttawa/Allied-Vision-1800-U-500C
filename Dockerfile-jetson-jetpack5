@@ -1,22 +1,45 @@
 FROM ultralytics/ultralytics:8.2.103-jetson-jetpack5
 
+# Prevent Python from writing .pyc files
 ENV PYTHONDONTWRITEBYTECODE=true
 
+# Define workspace path
 ENV WORKSPACE_PATH=/root/workspace
-RUN mkdir -p ${WORKSPACE_PATH}
+WORKDIR ${WORKSPACE_PATH}
 
-COPY        VimbaX_Setup-2024-1-Linux_ARM64.tar.gz ${WORKSPACE_PATH}
+# Copy installation package and application files
+COPY VimbaX_Setup-2024-1-Linux_ARM64.tar.gz .
+COPY ./app ./app
 
-RUN apt update && apt install -y usbutils vim && rm -rf /var/lib/apt/lists/*
+# Install necessary utilities and clean up package lists
+RUN apt update && \
+    apt install -y usbutils vim && \
+    rm -rf /var/lib/apt/lists/*
+
+# Upgrade pip and remove cache
 RUN python3 -m pip install --upgrade pip --no-cache-dir
-RUN cd ${WORKSPACE_PATH} \
-    && tar -xzf VimbaX_Setup-2024-1-Linux_ARM64.tar.gz -C /opt \
-    && mv /opt/VimbaX_2024-1 /opt/VimbaX \
-    && cd /opt/VimbaX/cti \
-    && ./Install_GenTL_Path.sh
-RUN cd /opt/VimbaX/api/python && pip3 install vmbpy-1.0.5-py3-none-any.whl --no-cache-dir
 
+# Extract and install VimbaX, then remove the installation package to save space
+RUN tar -xzf VimbaX_Setup-2024-1-Linux_ARM64.tar.gz -C /opt && \
+    mv /opt/VimbaX_2024-1 /opt/VimbaX && \
+    rm VimbaX_Setup-2024-1-Linux_ARM64.tar.gz
+
+# Run VimbaX installation script
+WORKDIR /opt/VimbaX/cti
+RUN ./Install_GenTL_Path.sh
+
+# Install Python dependencies
+WORKDIR /opt/VimbaX/api/python
+RUN pip3 install vmbpy-1.0.5-py3-none-any.whl --no-cache-dir
+
+# Set environment variables for VimbaX
 ENV GENICAM_GENTL64_PATH="/opt/VimbaX/cti"
+
+# Set workspace as the default working directory
+WORKDIR ${WORKSPACE_PATH}
+
+# Optional: Set the default entry point if running a Python application
+# ENTRYPOINT ["python", "app/main.py"]
 
 #            && rm VimbaX_Setup-2024-1-Linux_ARM64.tar.gz \
 
@@ -39,8 +62,7 @@ ENV GENICAM_GENTL64_PATH="/opt/VimbaX/cti"
 #            && rm -rf /opt/VimbaX/VimbaUSBTL/CTI/x86_32bit \
 #            && rm -rf /opt/VimbaX/VimbaGigETL/CTI/x86_32bit
 
-#ENV         GENICAM_GENTL64_PATH=$GENICAM_GENTL64_PATH:"/opt/VimbaX/VimbaUSBTL/CTI/x86_64bit"
 #
-#WORKDIR     /opt/VimbaX/VimbaPython/Examples
+
 #
 #ENTRYPOINT  ["python"]

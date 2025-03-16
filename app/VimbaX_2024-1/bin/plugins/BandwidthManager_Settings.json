@@ -1,0 +1,44 @@
+{
+    "FeaturesFilter": [
+        "DeviceLinkThroughputLimit",
+        "DeviceLinkThroughputLimitMode",
+        "ExposureTime",
+        "ExposureAuto",
+        "ExposureMode",
+        "TriggerMode",
+        "TriggerSource",
+        "AcquisitionFrameRate",
+        "AcquisitionFrameRateEnable",
+        "AcquisitionFrameRateMode",
+        "BandwidthControlMode",
+        "PayloadSize",
+        "StreamBytesPerSecond",
+        "StreamFrameRateConstrain",
+        "GevSCPSPacketSize",
+        "ExposureTimeAbs",
+        "ExposureMode",
+        "ExposureAuto",
+        "AcquisitionFrameRateAbs",
+        "AcquisitionFrameRateLimit",
+        "StreamAnnouncedBufferCount",
+        "StreamInputBufferCount",
+        "StreamOutputBufferCount",
+        "StreamIsGrabbing",
+        "FrameStatisticsCounter",
+        "FrameStatisticsCounterSelector",
+        "FramePacketStatisticsCounter",
+        "FramePacketStatisticsCounterSelector",
+        "FrameRate",
+        "FrameRateSelector",
+        "StreamTimeElapsed",
+        "StreamThroughput"
+        ],
+    
+    "CategoriesFilter": [
+        "Stream:/Stream/Settings",
+        "Stream:/Stream/Statistics",
+        "Camera:/ImageMode",
+        "Camera:/ImageFormat",
+        "Camera:/ImageFormatControl"
+    ]
+}
