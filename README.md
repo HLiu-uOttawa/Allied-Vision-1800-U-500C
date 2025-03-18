@@ -88,3 +88,16 @@ nvidia@orin-nx:/opt/VimbaX_2024-1/api/examples/VmbPy$
 ```
 ## Reference
 https://gist.github.com/stefannae/d0f9c3590bbeb6443a70be71f7604a74  
+
+graph LR
+    A[USB2 Webcam] -->|USB接口| B[Jetson Orin NX]
+    subgraph B[Jetson Orin NX]
+        C[Ubuntu 20.04]
+        subgraph C[Ubuntu 20.04]
+            D[Docker Container]
+            C -- /dev/video0 --> D
+            D -- /dev/video0 --> E[Ultralytics YOLO]
+            E -->|通过 /dev/video0 获取视频流| F[Tracking]
+        end
+    end
+
