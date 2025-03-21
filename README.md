@@ -88,3 +88,13 @@ nvidia@orin-nx:/opt/VimbaX_2024-1/api/examples/VmbPy$
 ```
 ## Reference
 https://gist.github.com/stefannae/d0f9c3590bbeb6443a70be71f7604a74  
+
+
+## Allied Vision Resources
+[Vimba X SDK](https://www.alliedvision.com/en/products/software/vimba-x-sdk/)
+[VmbPy Manual](https://docs.alliedvision.com/Vimba_X/Vimba_X_DeveloperGuide/pythonAPIManual.html)
+[VimbaX_Setup-2024-1-Win64.exe](https://downloads.alliedvision.com/VimbaX/VimbaX_Setup-2024-1-Win64.exe)
+## libs
+python.exe -m pip install --upgrade pip
+pip3 install ultralytics==8.2.103
+pip3 install .\vmbpy-1.0.5-py3-none-any.whl

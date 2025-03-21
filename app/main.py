@@ -79,7 +79,48 @@ def get_camera(camera_id: Optional[str]) -> Camera:
 
 
 def setup_camera(cam: Camera):
+    """
+    Set up the parameters of the camera. The parameters are:
+        cam.Width:      2592 by default for 5m camera
+        cam.Height:     1944 by default for 5m camera
+        cam.ExposureAuto
+    Args:
+        cam (Camera): the instant of Camera class.
+        cam.BalanceWhiteAuto
+
+    Returns:
+        none: no return value.
+
+    Example:
+
+    """
     with cam:
+        # try:
+        #     cam.Width.set(1280)
+        #     cam.Height.set(720)
+        #     print(f"Camera resolution set to: {cam.Width.get()}x{cam.Height.get()}")
+        # except (AttributeError, VmbFeatureError):
+        #     print("Warning: Failed to set resolution, using default settings.")
+
+        frame_rate = cam.AcquisitionFrameRate.get()
+        print(f"▒~S▒~I~M帧▒~N~G: {frame_rate} FPS")
+
+        frame_rate_range = cam.AcquisitionFrameRate.get_range()
+        print(f"帧▒~N~G▒~L~C▒~[▒: {frame_rate_range[0]} - {frame_rate_range[1]} FPS")
+
+        try:
+            cam.Width.set(2592)
+            cam.Height.set(1944)
+            print(f"Camera resolution set to: {cam.Width.get()}x{cam.Height.get()}")
+        except (AttributeError, VmbFeatureError):
+            print("Warning: Failed to set resolution, using default settings.")
+
+        try:
+            cam.BinningHorizontal.set(2)
+            cam.BinningVertical.set(2)
+            print(f"Camera binning set to:2")
+        except (AttributeError, VmbFeatureError):
+            print("Warning: Failed to set Binning, using default settings.")
 
         # Enable auto exposure time setting if camera supports it
         try:
@@ -90,7 +131,7 @@ def setup_camera(cam: Camera):
 
         # Enable white balancing if camera supports it
         try:
-            cam.BalanceWhiteAuto.set('Continuous')
+            cam.BalanceWhiteAuto.set('Once')  # Continuous
         except (AttributeError, VmbFeatureError):
             print("error: cam.BalanceWhiteAuto")
             pass
@@ -142,6 +183,7 @@ def main():
 
             try:
                 # Start Streaming with a custom a buffer of 10 Frames (defaults to 5)
+                # AllocationMode.AllocAndAnnounceFrame
                 cam.start_streaming(handler=frame_handler_x,
                                     buffer_count=10,
                                     allocation_mode=allocation_mode)
